@@ -15,6 +15,14 @@ app.get('/api/hello', (c) => {
   })
 })
 
+// query and params
+app.get('/posts/:id', (c) => {
+  const page = c.req.query('page')
+  const id = c.req.param('id')
+  c.header('X-Message', 'Hi!')
+  return c.text(`You want to see ${page} of ${id}`)
+})
+
 serve({
   fetch: app.fetch,
   port: 3000
