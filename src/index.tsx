@@ -10,6 +10,12 @@ app.notFound((c) => {
   return c.text('Custom 404 Message', 404)
 })
 
+// custom error
+app.onError((err, c) => {
+  console.error(`${err}`)
+  return c.text('Custom Error Message', 500)
+})
+
 // middleware basic auth
 app.use(
   "/admin/*",
