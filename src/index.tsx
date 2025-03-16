@@ -50,6 +50,11 @@ app.get("/page", (c) => {
   return c.html(<View />);
 });
 
+// raw response
+app.get('/raw', () => {
+  return new Response('Good morning!')
+})
+
 serve(
   {
     fetch: app.fetch,
