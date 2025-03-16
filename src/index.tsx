@@ -1,8 +1,22 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { basicAuth } from "hono/basic-auth";
 import { html, raw } from "hono/html";
 
 const app = new Hono();
+
+// middleware basic auth
+app.use(
+  "/admin/*",
+  basicAuth({
+    username: "admin",
+    password: "secret",
+  })
+);
+
+app.get("/admin", (c) => {
+  return c.text("You are authorized!");
+});
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
@@ -51,9 +65,9 @@ app.get("/page", (c) => {
 });
 
 // raw response
-app.get('/raw', () => {
-  return new Response('Good morning!')
-})
+app.get("/raw", () => {
+  return new Response("Good morning!");
+});
 
 serve(
   {
