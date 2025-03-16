@@ -5,6 +5,11 @@ import { html, raw } from "hono/html";
 
 const app = new Hono();
 
+// custom 404
+app.notFound((c) => {
+  return c.text('Custom 404 Message', 404)
+})
+
 // middleware basic auth
 app.use(
   "/admin/*",
