@@ -23,6 +23,18 @@ app.get('/posts/:id', (c) => {
   return c.text(`You want to see ${page} of ${id}`)
 })
 
+// post, put, patch, delete
+app.post('/posts', (c) => c.text('Created!', 201))
+app.put('/posts/:id', (c) =>
+  c.text(`${c.req.param('id')} is updated put!`)
+)
+app.patch('/posts/:id', (c) =>
+  c.text(`${c.req.param('id')} is updated patch!`)
+)
+app.delete('/posts/:id', (c) =>
+  c.text(`${c.req.param('id')} is deleted!`)
+)
+
 serve({
   fetch: app.fetch,
   port: 3000
